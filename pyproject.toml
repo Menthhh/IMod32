@@ -1,9 +1,10 @@
 [project]
 name = "imod32"
 version = "0.1.0"
-description = "Add your description here"
+description = "This software handle data management between modbus sensor and web app"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "pymodbus==3.8.0",
+    "pyserial>=3.5",
 ]
