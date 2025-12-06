@@ -5,6 +5,7 @@ description = "This software handle data management between modbus sensor and we
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "paho-mqtt>=2.1.0",
     "pymodbus==3.8.0",
     "pyserial>=3.5",
 ]

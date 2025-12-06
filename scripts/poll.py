@@ -8,7 +8,6 @@ logging.basicConfig(level=logging.INFO)
 
 class DeviceTimeoutError(Exception): ...
 
-
 POLL_INTERVAL_SEC = 1.0
 
 def set_interval_frequency(ms: int):
@@ -72,6 +71,7 @@ async def pull_data_async(config):
                 count=config.count,
                 slave=config.slave_id
             )
+            
         elif config.function_code == 4:
             resp = await client.read_input_registers(
                 address=config.start_address,
@@ -82,10 +82,11 @@ async def pull_data_async(config):
             raise Exception("Unsupported function code")
         return {
             "raw": resp.encode().hex(),
+            "raw_bytes": resp.encode(),
+            "slave_id": config.slave_id,
             "registers": getattr(resp, "registers", None),
-            # "objects": resp
         }
-
+        
     except Exception as e:
         return {"error": str(e)}
 
