@@ -26,9 +26,56 @@ export const toolbox = {
         },
         {
           kind: 'block',
+          type: 'ASCII_config'
+        },
+        {
+          kind: 'block',
           type: 'TCP_config'
         }
-      ] 
+      ]
+    },
+    {
+      kind: 'category',
+      name: 'Modbus Execution',
+      colour: '#5CA699',
+      contents: [
+        {
+          kind: 'block',
+          type: 'modbus_task_definition'
+        },
+        {
+          kind: 'block',
+          type: 'set_modbus_interval'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_pull_data'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_get_field'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_get_register'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_get_limiter'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_dcp_update'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_alarm_evaluator'
+        },
+        {
+          kind: 'block',
+          type: 'modbus_log'
+        }
+      ]
     },
     {
       kind: 'category',

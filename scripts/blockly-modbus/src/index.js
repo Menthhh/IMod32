@@ -5,18 +5,19 @@
  */
 
 import * as Blockly from 'blockly';
-import {pythonGenerator} from 'blockly/python';
+import { pythonGenerator } from 'blockly/python';
 import './blocks/connection_blocks';
+import './blocks/action_blocks';
 import { forBlock as modbusConnection } from './generators/python';
-import {save, load} from './serialization';
-import {toolbox} from './toolbox';
+import { save, load } from './serialization';
+import { toolbox } from './toolbox';
 import './index.css';
 
 Object.assign(pythonGenerator.forBlock, modbusConnection);
 const codeDiv = document.getElementById('generatedCode').firstChild;
 const outputDiv = document.getElementById('output');
 const blocklyDiv = document.getElementById('blocklyDiv');
-const ws = Blockly.inject(blocklyDiv, {toolbox});
+const ws = Blockly.inject(blocklyDiv, { toolbox });
 
 const runCode = () => {
   const code = pythonGenerator.workspaceToCode(ws);
