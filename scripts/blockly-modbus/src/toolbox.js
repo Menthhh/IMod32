@@ -79,6 +79,42 @@ export const toolbox = {
     },
     {
       kind: 'category',
+      name: 'Python Basics',
+      colour: '#5C81A6',
+      contents: [
+        {
+          kind: 'block',
+          type: 'python_print',
+          inputs: {
+            VALUE: { shadow: { type: 'text', fields: { TEXT: 'Hello, World!' } } },
+          },
+        },
+        {
+          kind: 'block',
+          type: 'python_input',
+          inputs: {
+            PROMPT: { shadow: { type: 'text', fields: { TEXT: 'Enter value: ' } } },
+          },
+        },
+        {
+          kind: 'block',
+          type: 'python_str_concat',
+          inputs: {
+            A: { shadow: { type: 'text', fields: { TEXT: 'Hello, ' } } },
+            B: { shadow: { type: 'text', fields: { TEXT: 'World!' } } },
+          },
+        },
+        {
+          kind: 'block',
+          type: 'python_cast',
+          inputs: {
+            VALUE: { shadow: { type: 'math_number', fields: { NUM: 0 } } },
+          },
+        },
+      ],
+    },
+    {
+      kind: 'category',
       name: 'Logic',
       categorystyle: 'logic_category',
       contents: [

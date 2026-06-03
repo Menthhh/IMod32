@@ -182,6 +182,28 @@ forBlock['modbus_log'] = function (block, generator) {
   return code;
 };
 
+forBlock['python_print'] = function (block, generator) {
+  const value = generator.valueToCode(block, 'VALUE', generator.ORDER_NONE) || '""';
+  return `print(${value})\n`;
+};
+
+forBlock['python_input'] = function (block, generator) {
+  const prompt = generator.valueToCode(block, 'PROMPT', generator.ORDER_NONE) || '""';
+  return [`input(${prompt})`, generator.ORDER_FUNCTION_CALL || 1];
+};
+
+forBlock['python_str_concat'] = function (block, generator) {
+  const a = generator.valueToCode(block, 'A', generator.ORDER_ADDITIVE) || '""';
+  const b = generator.valueToCode(block, 'B', generator.ORDER_ADDITIVE) || '""';
+  return [`str(${a}) + str(${b})`, generator.ORDER_ADDITIVE || 6];
+};
+
+forBlock['python_cast'] = function (block, generator) {
+  const value = generator.valueToCode(block, 'VALUE', generator.ORDER_NONE) || '0';
+  const type = block.getFieldValue('TYPE');
+  return [`${type}(${value})`, generator.ORDER_FUNCTION_CALL || 1];
+};
+
 /**
  * Override the finish method to append the main runner.
  */

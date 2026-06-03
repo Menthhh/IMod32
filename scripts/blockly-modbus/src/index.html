@@ -3,11 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>Blockly Sample App</title>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js"></script>
   </head>
   <body>
     <div id="pageContainer">
       <div id="outputPane">
+        <button id="runButton">&#9654; Run</button>
         <pre id="generatedCode"><code></code></pre>
+        <div id="outputLabel">Output:</div>
         <div id="output"></div>
       </div>
       <div id="blocklyDiv"></div>

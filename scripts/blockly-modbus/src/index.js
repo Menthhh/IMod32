@@ -8,6 +8,8 @@ import * as Blockly from 'blockly';
 import { pythonGenerator } from 'blockly/python';
 import './blocks/connection_blocks';
 import './blocks/action_blocks';
+import './blocks/text';
+import './blocks/python_basics';
 import { forBlock as modbusConnection } from './generators/python';
 import { save, load } from './serialization';
 import { toolbox } from './toolbox';
@@ -22,11 +24,42 @@ const ws = Blockly.inject(blocklyDiv, { toolbox });
 const runCode = () => {
   const code = pythonGenerator.workspaceToCode(ws);
   codeDiv.innerText = code;
+};
 
+document.getElementById('runButton').addEventListener('click', () => {
+  const code = pythonGenerator.workspaceToCode(ws);
   outputDiv.innerHTML = '';
 
+  const Sk = window.Sk;
+  if (!Sk) {
+    outputDiv.innerHTML = '<span style="color:red">Skulpt not loaded. Check your internet connection.</span>';
+    return;
+  }
 
-};
+  Sk.configure({
+    output: (text) => {
+      const line = document.createElement('span');
+      line.textContent = text;
+      outputDiv.appendChild(line);
+    },
+    read: (url) => {
+      if (Sk.builtinFiles?.files[url] === undefined)
+        throw new Error(`File not found: '${url}'`);
+      return Sk.builtinFiles.files[url];
+    },
+    inputfun: (prompt) => window.prompt(prompt) ?? '',
+    inputfunTakesPrompt: true,
+  });
+
+  Sk.misceval.asyncToPromise(() =>
+    Sk.importMainWithBody('<stdin>', false, code, true)
+  ).catch((err) => {
+    const errLine = document.createElement('span');
+    errLine.style.color = 'red';
+    errLine.textContent = err.toString();
+    outputDiv.appendChild(errLine);
+  });
+});
 
 // Load the initial state from storage and run the code.
 load(ws);
